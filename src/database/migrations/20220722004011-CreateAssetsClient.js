@@ -9,7 +9,7 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
         references: {
-          model: 'client',
+          model: 'clients',
           key: 'codClient',
         },
       },
@@ -23,8 +23,12 @@ module.exports = {
           key: 'codAsset',
         },
       },
+      amountAssets: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       value: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.INTEGER,
       },
 
     });
