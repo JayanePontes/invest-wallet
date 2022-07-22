@@ -4,5 +4,6 @@ const validateLogin = require('../Middleware/validateLogin');
 const router = Router();
 
 router.post('/login', validateLogin, clientController.loginClient);
+router.post('/assets/comprar', clientController.comprar);
 
 module.exports = router;
