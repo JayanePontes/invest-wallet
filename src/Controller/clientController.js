@@ -39,6 +39,14 @@ const clientController = {
     }
 
     res.status(201).json(vendido);
+  },
+
+  getAssetsClient: async (req, res) => {
+    const { codClient } = req.params;
+
+    const assetsList = await clientService.getAssetsClient(codClient);
+
+    res.status(200).json(assetsList);
   }
 }
 

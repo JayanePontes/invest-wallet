@@ -64,6 +64,12 @@ const loginService = {
     await db.assets.update(newSell, { where: { codAsset: codAsset }});
 
     return vendido;
+  },
+
+  getAssetsClient: async (codClient) => {
+    const assetsList = await db.AssetsClients.findAll({ where: { codClient }});
+
+    return assetsList;
   }
 };
 
