@@ -27,6 +27,18 @@ const clientController = {
     }
 
     res.status(201).json(comprado);
+  },
+
+  vender: async (req, res) => {
+    const { codAsset, amountAssets } = req.body;
+
+    const vendido = await clientService.vender(codAsset, amountAssets);
+
+    if (vendido === 'error') {
+      return res.status(400).json({ message: "Verifique a quantidade de ativos disponível"});
+    }
+
+    res.status(201).json(vendido);
   }
 }
 
