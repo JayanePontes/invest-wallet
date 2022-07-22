@@ -1,25 +1,19 @@
-const { Sequelize } = require("sequelize/types");
+const sequelize = require('sequelize');
 
 const createAssets = (sequelize, DataTypes) => {
-  const Assets = sequelize.define('client', {
+  const Assets = sequelize.define('assets', {
     codAsset: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
   },
-    amountAssets: DataTypes.STRING,
-    value: DataTypes.DECIMAL,
+    amountAssets: DataTypes.INTEGER,
+    value: DataTypes.INTEGER,
   }, 
     {
       timestamps: false,
     });
-    
-  Assets.associate = (models) => {
-    Assets.hasMany(models.assetsClient, {
-      foreignKey: 'codAsset', as: 'assetsClient',
-    });
-  };
   return Assets;
 }
     

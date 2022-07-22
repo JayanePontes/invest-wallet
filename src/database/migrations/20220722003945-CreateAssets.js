@@ -10,12 +10,10 @@ module.exports = {
         autoIncrement: true,
       },
       amountAssets: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      value: {
-        type: Sequelize.DECIMAL,
-      },
+      value: Sequelize.INTEGER,
     });
   },
 

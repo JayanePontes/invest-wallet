@@ -8,24 +8,15 @@ const createAssetsClient = (sequelize, DataTypes) => {
     codAsset: {
       type: DataTypes.INTEGER,
     },
+    amountAssets: {
+      type: DataTypes.INTEGER,
+    },
+    value: {
+      type: DataTypes.INTEGER
+    }
   }, {
     timestamps: false,
   });
-
-  assetsClient.associate = (models) => {
-    models.client.belongsToMany(models.assets, {
-      as: 'assets',
-      through: assetsClient,
-      foreignKey: 'codClient',
-      otherKey: 'codAsset',
-    });
-    models.assets.belongsToMany(models.client, {
-      as: 'client',
-      through: assetsClient,
-      foreignKey: 'codAsset',
-      otherKey: 'codClient',
-    });
-  }
 
   return assetsClient;
 }

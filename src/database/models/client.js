@@ -1,27 +1,21 @@
+const sequelize = require('sequelize');
+
 const createClient = (sequelize, DataTypes) => {
-  const Client = sequelize.define('client', {
+  const Client = sequelize.define('Clients', {
     codClient: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
   },
-      name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      passwordHash: DataTypes.STRING,
-  }, {
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+  },
+    {
+      tableName:'clients',
       timestamps: false,
-  });
-  
-  Client.associate = (models) => {
-    Client.hasMany(models.assetsClient, {
-      foreignKey: 'codClient', as: 'assetsClient',
-    });
-    Client.hasMany(models.walletClient, {
-      foreignKey: 'codClient', as: 'walletClient',
-    });
-  };
-  
+    });  
   return Client;
 }
   

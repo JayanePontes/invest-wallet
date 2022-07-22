@@ -2,24 +2,24 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('client',
+    await queryInterface.bulkInsert('clients',
       [{
         codClient: 1,
         name: 'Shirley Hamilton',
         email: 'shirleyhamilton@gmail.com',
-        passwordHash: '123456',
+        password: '123456',
 
       },
       {
         codClient: 2,
         name: 'Miguel Souza',
         email: 'Miguesouza@gmail.com',
-        passwordHash: '123456',
+        password: '123456',
       },
       ], { timestamps: false });
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('client', null, {});
+    await queryInterface.bulkDelete('clients', null, {});
   },
 };
