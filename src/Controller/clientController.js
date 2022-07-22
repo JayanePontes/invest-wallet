@@ -16,6 +16,18 @@ const clientController = {
 
     next();
   },
+
+  comprar: async (req, res) => {
+    const { codClient, codAsset, amountAssets, value } = req.body;
+
+    const comprado = await clientService.comprar(codClient, codAsset, amountAssets, value);
+
+    if (comprado === 'error') {
+      return res.status(400).json({ message: "Verifique a quantidade de ativos disponível"});
+    }
+
+    res.status(201).json(comprado);
+  }
 }
 
 module.exports = clientController;
