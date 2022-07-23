@@ -1,5 +1,3 @@
-const sequelize = require('sequelize');
-
 const createAssetsClient = (sequelize, DataTypes) => {
   const assetsClient = sequelize.define('AssetsClients', {
     codClient: {
@@ -8,15 +6,12 @@ const createAssetsClient = (sequelize, DataTypes) => {
     },
     codAsset: {
       type: DataTypes.INTEGER,
-      primaryKey:true,
+      primaryKey: true,
     },
-    amountAssets: {
-      type: DataTypes.INTEGER,
-    },
-    value: {
-      type: DataTypes.INTEGER
-    }
-  }, {
+    amountAssets: DataTypes.INTEGER,
+    value: DataTypes.DECIMAL(10,2),
+  },
+  {
     timestamps: false,
   });
 
@@ -33,9 +28,8 @@ const createAssetsClient = (sequelize, DataTypes) => {
       foreignKey: 'codAsset',
       otherKey: 'codClient',
     });
-  }
-
+  };
   return assetsClient;
-}
+};
 
 module.exports = createAssetsClient;
