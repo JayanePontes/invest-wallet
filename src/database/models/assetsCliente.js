@@ -8,6 +8,10 @@ const createAssetsClient = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
+    value: {
+      type: DataTypes.DECIMAL(10,2),
+    }
+  }, {
     amountAssets: DataTypes.INTEGER,
     value: DataTypes.DECIMAL(10,2),
   },

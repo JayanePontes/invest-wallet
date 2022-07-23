@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      value: Sequelize.INTEGER,
+      value: Sequelize.DECIMAL(10,2),
     });
   },
 

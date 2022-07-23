@@ -64,6 +64,32 @@ const loginService = {
 
     return assetsList;
   },
+
+  postDeposito: async (codClient, value) => {
+    const wallet = await db.WalletClients.findOne({ where: { codClient } });
+
+    if (!value || Number(value) < 0.01) return 'error';
+    
+    const newValue = Number(wallet.value) + Number(value);
+
+    await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
+  },
+
+  postSaque: async (codClient, value) => {
+    const wallet = await db.WalletClients.findOne({ where: { codClient } });
+
+    if (!value || value > wallet.value || value < 0.01) return 'error';
+
+    const newValue = Number(wallet.value) - Number(value);
+
+    await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
+  },
+
+  getWallet: async (codClient) => {
+    const wallet = await db.WalletClients.findAll({ where: { codClient: codClient }});
+
+    return wallet;
+  }
 };
 
 module.exports = loginService;
