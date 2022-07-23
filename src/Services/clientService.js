@@ -31,7 +31,7 @@ const loginService = {
 
   comprar: async (codClient, codAsset, amountAssets, value) => {
     const assets = await db.assets.findOne({ where: { codAsset } });
-    const newAmount = assets.amountAssets - amountAssets;
+    const newAmount = Number(assets.amountAssets) - Number(amountAssets);
 
     if (amountAssets > assets.amountAssets) return 'error';
 
@@ -42,14 +42,14 @@ const loginService = {
       where: { codAsset: codAsset },
     });
 
-    await db.assets.update(newAmount, { where: { codAsset: codAsset }});
+    await db.assets.update({ amountAssets: newAmount }, { where: { codAsset: codAsset }});
     
     return comprado;
   },
 
   vender: async (codAsset, amountAssets) => {
     const assets = await db.AssetsClients.findOne({ where: { codAsset } });
-    const newSell = assets.amountAssets + amountAssets;
+    const newSell = Number(assets.amountAssets) - Number(amountAssets);
 
     const vendido = await db.AssetsClients.findAll({ 
       attributes: ['codClient', 'codAsset', 'amountAssets'],
@@ -57,11 +57,8 @@ const loginService = {
     });
 
     if (amountAssets > assets.amountAssets) return 'error';
-    if (assets.amountAssets === 0) {
-      return await db.AssetsClients.destroy({ where: { codAsset: codAsset } });
-    }
 
-    await db.assets.update(newSell, { where: { codAsset: codAsset }});
+    await db.AssetsClients.update({ amountAssets: newSell }, { where: { codAsset: codAsset }});
 
     return vendido;
   },
@@ -70,7 +67,7 @@ const loginService = {
     const assetsList = await db.AssetsClients.findAll({ where: { codClient }});
 
     return assetsList;
-  }
+  },
 };
 
 module.exports = loginService;
