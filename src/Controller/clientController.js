@@ -72,6 +72,14 @@ const clientController = {
 
     res.status(200).json({ codClient, value });
   },
+
+  getWallet: async (req, res) => {
+    const { codClient } = req.params;
+
+    const wallet = await clientService.getWallet(codClient);
+
+    res.status(200).json(wallet);
+  }
 }
 
 module.exports = clientController;

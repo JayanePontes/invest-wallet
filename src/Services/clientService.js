@@ -88,6 +88,12 @@ const loginService = {
 
     await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
   },
+
+  getWallet: async (codClient) => {
+    const wallet = await db.WalletClients.findAll({ where: { codClient: codClient }});
+
+    return wallet;
+  }
 };
 
 module.exports = loginService;

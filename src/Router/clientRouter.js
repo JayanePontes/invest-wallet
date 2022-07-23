@@ -4,6 +4,7 @@ const validateLogin = require('../Middleware/validateLogin');
 const { validateToken } = require('../Middleware/jwtToken');
 const router = Router();
 
+router.get('/wallet/:codClient', validateToken, clientController.getWallet);
 router.get('/assets/client/:codClient', validateToken, clientController.getAssetsClient);
 router.post('/login', validateLogin, clientController.loginClient);
 router.post('/assets/comprar', validateToken, clientController.comprar);
