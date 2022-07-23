@@ -2,7 +2,7 @@ const db = require('../database/models/index');
 
 const assetsService = {
   getAsset: async (codAsset) => {
-    const asset = await db.assets.findAll({ where: { codAsset }});
+    const asset = await db.assets.findAll({ where: { codAsset } });
 
     if (asset.length === 0) return 'error';
 
@@ -13,7 +13,7 @@ const assetsService = {
     const assets = await db.assets.findAll();
     
     return assets;
-  }
+  },
 };
 
 module.exports = assetsService;

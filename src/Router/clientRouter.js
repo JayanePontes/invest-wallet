@@ -2,6 +2,7 @@ const { Router } = require('express');
 const clientController = require('../Controller/clientController');
 const validateLogin = require('../Middleware/validateLogin');
 const { validateToken } = require('../Middleware/jwtToken');
+
 const router = Router();
 
 router.get('/wallet/:codClient', validateToken, clientController.getWallet);

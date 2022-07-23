@@ -6,11 +6,11 @@ const clientController = {
     const { email, password } = req.body;
 
     const token = await clientService.login(email, password);
+    
+    res.status(200).json({ token });
+  },
 
-	  res.status(200).json({ token }); 
-	},
-
-	validateToken: (req, _res, next) => {
+  validateToken: (req, _res, next) => {
     const { authorization } = req.headers;
     jwtToken.validateToken(authorization);
 
@@ -23,7 +23,7 @@ const clientController = {
     const comprado = await clientService.comprar(codClient, codAsset, amountAssets, value);
 
     if (comprado === 'error') {
-      return res.status(400).json({ message: "Verifique a quantidade de ativos disponível"});
+      return res.status(400).json({ message: 'Verifique a quantidade de ativos disponível' });
     }
 
     res.status(201).json(comprado);
@@ -35,7 +35,7 @@ const clientController = {
     const vendido = await clientService.vender(codAsset, amountAssets);
 
     if (vendido === 'error') {
-      return res.status(400).json({ message: "Verifique a quantidade de ativos disponível"});
+      return res.status(400).json({ message: 'Verifique a quantidade de ativos disponível' });
     }
 
     res.status(201).json(vendido);
@@ -80,6 +80,6 @@ const clientController = {
 
     res.status(200).json(wallet);
   }
-}
+};
 
 module.exports = clientController;
