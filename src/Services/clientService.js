@@ -68,6 +68,17 @@ const loginService = {
 
     return assetsList;
   },
+
+  postDeposito: async (codClient, value) => {
+    const wallet = await db.WalletClients.findOne({ where: { codClient } });
+
+    if (!value || Number(value) < 1) { return 'error' }
+    
+    const newValue = Number(wallet.value) + Number(value);
+
+    await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
+
+  },
 };
 
 module.exports = loginService;

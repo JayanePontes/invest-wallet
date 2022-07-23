@@ -14,7 +14,7 @@ const createAssetsClient = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     value: {
-      type: DataTypes.INTEGER
+      type: DataTypes.DECIMAL(10,2),
     }
   }, {
     timestamps: false,

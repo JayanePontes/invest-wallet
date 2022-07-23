@@ -48,6 +48,18 @@ const clientController = {
 
     res.status(200).json(assetsList);
   },
+
+  postDeposito: async (req, res) => {
+    const { codClient, value } = req.body;
+
+    const deposito = await clientService.postDeposito(codClient, value);
+
+    if (deposito === 'error') {
+      return res.status(400).json({ message: "Insira um valor a ser depositado" });
+    }
+    
+    res.status(200).json({ codClient, value });
+  }
 }
 
 module.exports = clientController;

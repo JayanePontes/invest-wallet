@@ -9,7 +9,7 @@ const createAssets = (sequelize, DataTypes) => {
       allowNull: false,
   },
     amountAssets: DataTypes.INTEGER,
-    value: DataTypes.INTEGER,
+    value: DataTypes.DECIMAL(10,2),
   }, 
     {
       timestamps: false,

@@ -8,5 +8,6 @@ router.get('/assets/client/:codClient', validateToken, clientController.getAsset
 router.post('/login', validateLogin, clientController.loginClient);
 router.post('/assets/comprar', validateToken, clientController.comprar);
 router.post('/assets/vender', validateToken, clientController.vender);
+router.post('/wallet/deposito', validateToken, clientController.postDeposito);
 
 module.exports = router;

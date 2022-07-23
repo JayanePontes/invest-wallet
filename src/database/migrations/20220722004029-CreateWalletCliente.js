@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('walletClient', {
+    await queryInterface.createTable('WalletClients', {
       codClient: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -14,13 +14,14 @@ module.exports = {
         },
       },
       value: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10,2),
+        allowNull: false,
       },
     });
 
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('walletClient');
+    await queryInterface.dropTable('WalletClients');
   }
 };
