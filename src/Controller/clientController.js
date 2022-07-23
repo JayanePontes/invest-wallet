@@ -47,7 +47,7 @@ const clientController = {
     const assetsList = await clientService.getAssetsClient(codClient);
 
     res.status(200).json(assetsList);
-  }
+  },
 }
 
 module.exports = clientController;
