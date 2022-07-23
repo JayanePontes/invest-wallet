@@ -59,7 +59,19 @@ const clientController = {
     }
     
     res.status(200).json({ codClient, value });
-  }
+  },
+
+  postSaque: async (req, res) => {
+    const { codClient, value } = req.body;
+
+    const saque = await clientService.postSaque(codClient, value);
+
+    if (saque === 'error') {
+      return res.status(400).json({ message: "Insira um valor a ser sacado" });
+    }
+
+    res.status(200).json({ codClient, value });
+  },
 }
 
 module.exports = clientController;

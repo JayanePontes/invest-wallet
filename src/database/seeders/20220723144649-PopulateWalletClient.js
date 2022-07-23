@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('WalletClients',
       [{
         codClient: 1,
-        value: 0,
+        value: 0.00,
       },
       ], { timestamps: false });
   },

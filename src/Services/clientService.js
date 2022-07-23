@@ -72,12 +72,21 @@ const loginService = {
   postDeposito: async (codClient, value) => {
     const wallet = await db.WalletClients.findOne({ where: { codClient } });
 
-    if (!value || Number(value) < 1) { return 'error' }
+    if (!value || Number(value) < 0.01) return 'error';
     
     const newValue = Number(wallet.value) + Number(value);
 
     await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
+  },
 
+  postSaque: async (codClient, value) => {
+    const wallet = await db.WalletClients.findOne({ where: { codClient } });
+
+    if (!value || value > wallet.value || value < 0.01) return 'error';
+
+    const newValue = Number(wallet.value) - Number(value);
+
+    await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
   },
 };
 
