@@ -8,16 +8,15 @@ const createAssetsClient = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    value: {
-      type: DataTypes.DECIMAL(10,2),
-    }
-  }, {
+    name: DataTypes.STRING,
     amountAssets: DataTypes.INTEGER,
     value: DataTypes.DECIMAL(10,2),
+    investesAmount: DataTypes.DECIMAL(10,2),
   },
-  {
-    timestamps: false,
-  });
+    {
+      timestamps: false,
+    },
+  );
 
   assetsClient.associate = (models) => {
     models.Clients.belongsToMany(models.assets, {
