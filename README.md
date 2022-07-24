@@ -24,15 +24,17 @@
 2. Instale as dependências
   * `npm install`
 
-    - Cria o banco e gera as tabelas:
-    ```json
-    npx sequelize-cli db:create && npx sequelize-cli db:migrate
-    ```
+3. Cria o banco e gera as tabelas:
+    
+    `npx sequelize-cli db:create && npx sequelize-cli db:migrate`
 
-    - Insere dados/Popula a tabela:
-    ```json
-    npx sequelize-cli db:seed:all
-    ```
+4. Insere dados/Popula a tabela:
+    
+    `npx sequelize-cli db:seed:all`
+
+5. Executar a aplicação:
+
+    `npm run debug`
 
 # Endpoints
   1. POST `/login` - Utilizando JWT para autenticar o usuário
