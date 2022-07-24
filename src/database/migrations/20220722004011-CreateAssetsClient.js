@@ -23,6 +23,7 @@ module.exports = {
           key: 'codAsset',
         },
       },
+      name: Sequelize.STRING,
       amountAssets: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -30,7 +31,7 @@ module.exports = {
       value: {
         type: Sequelize.DECIMAL(10,2),
       },
-
+      investesAmount: Sequelize.DECIMAL(10,2),
     });
 
   },

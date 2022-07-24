@@ -18,19 +18,22 @@ const clientController = {
   },
 
   comprar: async (req, res) => {
-    const { codClient, codAsset, amountAssets, value } = req.body;
-
-    const comprado = await clientService.comprar(codClient, codAsset, amountAssets, value);
+    const { codClient, codAsset, name, amountAssets, value } = req.body;
+    const comprado = await clientService.comprar(codClient, codAsset, name, amountAssets, value);
 
     if (comprado === 'error') {
       return res.status(400).json({ message: 'Verifique a quantidade de ativos disponível' });
     }
 
-    res.status(201).json(comprado);
+    if (comprado === 'error name') {
+      return res.status(400).json({ message: 'O nome do ativo não corresponde' });
+    }
+    
+    res.status(201).json({ codClient, codAsset, amountAssets });
   },
 
   vender: async (req, res) => {
-    const { codAsset, amountAssets } = req.body;
+    const { codClient, codAsset, amountAssets } = req.body;
 
     const vendido = await clientService.vender(codAsset, amountAssets);
 
@@ -38,7 +41,7 @@ const clientController = {
       return res.status(400).json({ message: 'Verifique a quantidade de ativos disponível' });
     }
 
-    res.status(201).json(vendido);
+    res.status(201).json({ codClient, codAsset, amountAssets });
   },
 
   getAssetsClient: async (req, res) => {
@@ -55,7 +58,7 @@ const clientController = {
     const deposito = await clientService.postDeposito(codClient, value);
 
     if (deposito === 'error') {
-      return res.status(400).json({ message: "Insira um valor a ser depositado" });
+      return res.status(400).json({ message: 'Insira um valor a ser depositado' });
     }
     
     res.status(200).json({ codClient, value });
@@ -67,7 +70,7 @@ const clientController = {
     const saque = await clientService.postSaque(codClient, value);
 
     if (saque === 'error') {
-      return res.status(400).json({ message: "Insira um valor a ser sacado" });
+      return res.status(400).json({ message: 'Insira um valor a ser sacado' });
     }
 
     res.status(200).json({ codClient, value });
@@ -79,7 +82,7 @@ const clientController = {
     const wallet = await clientService.getWallet(codClient);
 
     res.status(200).json(wallet);
-  }
+  },
 };
 
 module.exports = clientController;

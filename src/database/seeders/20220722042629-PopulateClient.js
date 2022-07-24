@@ -8,7 +8,6 @@ module.exports = {
         name: 'Shirley Hamilton',
         email: 'shirleyhamilton@gmail.com',
         password: '123456',
-
       },
       {
         codClient: 2,

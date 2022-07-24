@@ -27,20 +27,26 @@ const loginService = {
     return data;
   },
 
-  comprar: async (codClient, codAsset, amountAssets, value) => {
+  comprar: async (codClient, codAsset, name, amountAssets, value) => {
     const assets = await db.assets.findOne({ where: { codAsset } });
     const newAmount = Number(assets.amountAssets) - Number(amountAssets);
+    const newinvestesAmount = Number(assets.value) * Number(amountAssets);
+    const exist = await db.AssetsClients.findOne({ where: { codAsset } });
+    const verifica = Number(assets.codAsset) === Number(codAsset) && assets.name === name;
 
     if (amountAssets > assets.amountAssets) return 'error';
+    if (!verifica) return 'error name';
 
-    await db.AssetsClients.create({ codClient, codAsset, amountAssets, value });
-
-    const comprado = await db.AssetsClients.findAll({
-      attributes: ['codClient', 'codAsset', 'amountAssets'], where: { codAsset } });
-
-    await db.assets.update({ amountAssets: newAmount }, { where: { codAsset } });
-
-    return comprado;
+    if (exist) {
+      const amount = Number(exist.amountAssets) + Number(amountAssets);
+      await db.AssetsClients.update({ amountAssets: amount }, { where: { codAsset } });
+      await db.assets.update({ amountAssets: newAmount }, { where: { codAsset } });
+    } else {
+      await db.AssetsClients.create({
+        codClient, codAsset, name, amountAssets, value, investesAmount: newinvestesAmount,
+      });
+      await db.assets.update({ amountAssets: newAmount }, { where: { codAsset } });      
+    }
   },
 
   vender: async (codAsset, amountAssets) => {
@@ -72,7 +78,7 @@ const loginService = {
     
     const newValue = Number(wallet.value) + Number(value);
 
-    await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
+    await db.WalletClients.update({ value: newValue }, { where: { codClient } });
   },
 
   postSaque: async (codClient, value) => {
@@ -82,14 +88,14 @@ const loginService = {
 
     const newValue = Number(wallet.value) - Number(value);
 
-    await db.WalletClients.update({ value: newValue }, { where: { codClient: codClient }});
+    await db.WalletClients.update({ value: newValue }, { where: { codClient } });
   },
 
   getWallet: async (codClient) => {
-    const wallet = await db.WalletClients.findAll({ where: { codClient: codClient }});
+    const wallet = await db.WalletClients.findAll({ where: { codClient } });
 
     return wallet;
-  }
+  },
 };
 
 module.exports = loginService;
